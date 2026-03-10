@@ -230,6 +230,18 @@ export default function App() {
     setLog(data.log);
     historyRef.current = data.history;
     logRef.current = data.log;
+    
+    // Restore today's session count from history
+    const todayCount = data.history[today()] || 0;
+    setSessionsToday(todayCount);
+    sessRef.current = todayCount;
+    
+    // Restore total focus time from today's log entries
+    const todayFocusSecs = data.log.filter(
+      e => e.mode === "work" && toDateKey(e.ts) === today()
+    ).length * MODES.work.duration;
+    setTotalFocusSecs(todayFocusSecs);
+    focusRef.current = todayFocusSecs;
   }, []);
 
   // ── WAKE LOCK ─────────────────────────────────────────────────────────────
