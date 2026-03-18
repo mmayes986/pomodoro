@@ -82,8 +82,8 @@ function Heatmap({ history }) {
 
   const cellColor = (count) => {
     if (!count) return "#1e1e1e";
-    const t = Math.min(count / Math.max(4, maxCount), 1);
-    const l = Math.round(20 + t * 50);
+    const t = Math.min(count / Math.max(6, maxCount), 1);
+    const l = Math.round(70 - t * 50);
     return `hsl(10, 72%, ${l}%)`;
   };
 
@@ -122,10 +122,10 @@ function Heatmap({ history }) {
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 6, paddingLeft: 28 }}>
         <span style={{ fontSize: 9, color: "#444", fontFamily: "DM Mono,monospace", marginRight: 2 }}>Less</span>
-        {[0, 1, 2, 3, 4].map(i => (
+        {[0, 1, 2, 3, 4, 5, 6].map(i => (
           <div key={i} style={{
             width: CELL, height: CELL, borderRadius: 3,
-            background: i === 0 ? "#1e1e1e" : `hsl(10,72%,${20 + i * 14}%)`,
+            background: i === 0 ? "#1e1e1e" : `hsl(10,72%,${70 - i * 10}%)`,
             opacity: i === 0 ? 0.5 : 1,
           }} />
         ))}
@@ -195,8 +195,8 @@ export default function App() {
   const [elapsed, setElapsed] = useState(0);
   const [sessionsToday, setSessionsToday] = useState(0);
   const [totalFocusSecs, setTotalFocusSecs] = useState(0);
-  const [wlEnabled, setWlEnabled] = useState(false);
-  const [wlActive, setWlActive] = useState(false);
+  const [wlEnabled, setWlEnabled] = useState(true);
+  const [wlActive, setWlActive] = useState(true);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState({});
   const [log, setLog] = useState([]);
